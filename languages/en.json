@@ -1,3 +1,5 @@
 {
-    "MODULE.hello": "hello"
+    "ltbl5e.light_conflict": " as light source is already equipped",
+    "ltbl5e.multiple_items": "Multiple items as light source",
+    "ltbl5e.no_use_left": "No use left in the "
 }

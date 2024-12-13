@@ -1,0 +1,29 @@
+
+{
+    "items": [
+        {
+            "name": "Lantern, Bullseye",
+            "color": "#fff1b4",
+            "angle": 45,
+            "bright": 60,
+            "dim": 60,
+            "animation": {
+                "type": "torch",
+                "speed": 1,
+                "intensity": 1
+            }
+        },
+        {
+            "name": "Lantern, Hooded",
+            "color": "#fff1b4",
+            "angle": 360,
+            "bright": 30,
+            "dim": 30,
+            "animation": {
+                "type": "torch",
+                "speed": 1,
+                "intensity": 2
+            }
+        }
+    ]
+}

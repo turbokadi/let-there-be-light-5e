@@ -1,0 +1,136 @@
+{
+    "items": [
+        {
+            "name": "Candle",
+            "color": "#ffde94",
+            "angle": 360,
+            "bright": 5,
+            "dim": 5,
+            "animation": {
+                "type": "torch",
+                "speed": 3,
+                "intensity": 4
+            }
+        },
+        {
+            "name": "Candle of Invocation",
+            "color": "#ffde94",
+            "angle": 360,
+            "bright": 0,
+            "dim": 30,
+            "animation": {
+                "type": "torch",
+                "speed": 3,
+                "intensity": 4
+            }
+        },
+        {
+            "name": "Lamp",
+            "color": "#ffde94",
+            "angle": 360,
+            "bright": 15,
+            "dim": 30,
+            "animation": {
+                "type": "torch",
+                "speed": 2,
+                "intensity": 2
+            }
+        },
+        {
+            "name": "Torch",
+            "color": "#ffa439",
+            "angle": 360,
+            "bright": 20,
+            "dim": 20,
+            "animation": {
+                "type": "torch",
+                "speed": 2,
+                "intensity": 3
+            }
+        },
+        {
+            "name": "Bullseye Lantern",
+            "color": "#fff1b4",
+            "angle": 45,
+            "bright": 60,
+            "dim": 60,
+            "animation": {
+                "type": "torch",
+                "speed": 1,
+                "intensity": 1
+            }
+        },
+        {
+            "name": "Hooded Lantern",
+            "color": "#fff1b4",
+            "angle": 360,
+            "bright": 30,
+            "dim": 30,
+            "animation": {
+                "type": "torch",
+                "speed": 1,
+                "intensity": 2
+            }
+        },
+        {
+            "name": "Lantern of Revealing",
+            "color": "#fff1b4",
+            "angle": 360,
+            "bright": 30,
+            "dim": 30,
+            "animation": {
+                "type": "torch",
+                "speed": 1,
+                "intensity": 2
+            }
+        },
+        {
+            "name": "Wand of Lightning Bolts",
+            "color": "#42ffc0",
+            "angle": 360,
+            "bright": 1,
+            "dim": 5,
+            "animation": {
+                "type": "pulse",
+                "speed": 4,
+                "intensity": 8
+            }
+        },
+        {
+            "name": "Staff of Thunder and Lightning",
+            "color": "#42b7ff",
+            "angle": 360,
+            "bright": 3,
+            "dim": 10,
+            "animation": {
+                "type": "pulse",
+                "speed": 4,
+                "intensity": 8
+            }
+        },
+        {
+            "name": "Staff of Fire",
+            "color": "#ff622e",
+            "angle": 360,
+            "bright": 4,
+            "dim": 12,
+            "animation": {
+                "type": "torch",
+                "speed": 6,
+                "intensity": 3
+            }
+        },
+        {
+            "name": "Staff of Power",
+            "color": "#ff2ec7",
+            "angle": 360,
+            "bright": 3,
+            "dim": 10,
+            "animation": {
+                "type": "starlight",
+                "speed": 2,
+                "intensity": 10
+            }
+        }
+    ]
+}

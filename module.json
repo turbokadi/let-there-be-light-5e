@@ -1,31 +1,37 @@
 {
-  "id": "module",
-  "title": "New Module",
-  "description": "",
-  "version": "#{VERSION}#",
+  "id": "let-there-be-light-5e",
+  "title": "Let There Be Light 5e",
+  "description": "Whether it is an object that emits light or a condition that allows you to see, there will be light !",
+  "version": "1.0.0",
   "library": "false",
-  "manifestPlusVersion": "1.2.0",
   "compatibility": {
-    "minimum": 10,
-    "verified": 10,
-    "maximum": 11
+    "minimum": 11,
+    "verified": 12,
+    "maximum": 12
   },
   "authors": [
     {
-      "name": "The League of Extraordinary FVTT Developers",
-      "url": "https://github.com/League-of-Foundry-Developers",
-      "discord": "discordID#0001"
+      "name": "turbokadi",
+      "url": "https://github.com/turbokadi",
+      "discord": "turbokadi",
+      "ko-fi": "https://ko-fi.com/turbokadi"
     }
   ],
   "relationships": {
-    "systems": [],
+    "systems": [
+      {
+        "id": "dnd5e",
+        "type": "system",
+        "compatibility": {
+          "minimum": "4.1.0",
+          "verified": "4.1.2"
+        }
+      }
+    ],
     "requires": []
   },
   "esmodules": [
-    "scripts/module.js"
-  ],
-  "scripts": [
-    "scripts/lib/lib.js"
+    "main.js"
   ],
   "styles": [
     "styles/module.css"
@@ -37,15 +43,15 @@
       "path": "languages/en.json"
     }
   ],
-  "url": "#{URL}#",
-  "manifest": "#{MANIFEST}#",
-  "download": "#{DOWNLOAD}#",
+  "url": "https://github.com/turbokadi/let-there-be-light-5e",
+  "manifest": "https://github.com/turbokadi/let-there-be-light-5e/releases/latest/download/module.json",
+  "download": "https://github.com/turbokadi/let-there-be-light-5e/releases/latest/download/module.zip",
   "license": "LICENSE",
   "readme": "README.md",
   "media": [
     {
       "type": "icon",
-      "url": "https://avatars2.githubusercontent.com/u/71292812?s=400&u=ccdb4eeb7abf551ca8f314e5a9bfd0479a4d3d41&v=4"
+      "url": "https://raw.githubusercontent.com/turbokadi/let-there-be-light-5e/refs/heads/master/assets/icon.png"
     }
   ]
 }
