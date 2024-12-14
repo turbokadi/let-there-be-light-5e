@@ -1,13 +1,20 @@
 ![](https://img.shields.io/badge/Foundry-v12-informational)
+[![version](https://img.shields.io/badge/version-1.0.1-red.svg)](https://semver.org)
+
+[<img src="licensed/dnd.png" height="76"/>](licensed/dnd.png "D&D Licensed")
+[<img src="licensed/srd.png" height="76"/>](licensed/srd.png "SRD 5th")
 
 # Let There Be Light 5e - FoundryVTT Module
 
 [<img src="assets/icon.png" width="164"/>](assets/icon.png "Let There Be Light 5e")
 
-This module auto apply vision trait and equipped light source item to their corresponding token automatically.<br>
-It only works for DnD5e and support Player Handbook Module as well.
+Let There Be Light 5e FoundryVTT module auto apply vision traits and equipped light source items of any playable<br>
+character to their corresponding token automatically. It only works for DnD5e and<br>
+support Player Handbook 2024 official module as well.
 
-## FAQ:
+<br>
+
+# FAQ:
 
 ### What if I create a character with darkvision 120 trait ?
 
@@ -21,6 +28,23 @@ The Torch light stats are applied to your character directly when you equipped i
 
 You can't have more than one light source equipped, the Lamp will be unequipped.
 
+### What if my Torch doesn't any charge left ?
+
+The Torch wont make any light and you will have a notification
+
+### Why Wands and Staffs shine ?
+
+Why not ;P
+
+<br>
+
 ## You want to ask for a change, a fix, release a new version ?
 
 Make a Pull Request explaining your problem and I will do my best
+
+<br>
+
+## Copyrights
+
+All licensed content, including rules, text, and imagery, belongs to their respective copyright holders.<br>
+This module respects and adheres to the ownership rights of the original creators, including Wizards of the Coast for D&D content.
