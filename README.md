@@ -28,7 +28,7 @@ The Torch light stats are applied to your character directly when you equipped i
 
 You can't have more than one light source equipped, the Lamp will be unequipped.
 
-### What if my Torch doesn't any charge left ?
+### What if my Torch doesn't any use left ?
 
 The Torch wont make any light and you will have a notification
 

@@ -2,7 +2,7 @@
   "id": "let-there-be-light-5e",
   "title": "Let There Be Light 5e",
   "description": "Whether it is an object that emits light or a condition that allows you to see, there will be light !",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "library": "false",
   "compatibility": {
     "minimum": 11,
