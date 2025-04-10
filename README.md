@@ -1,5 +1,5 @@
 ![](https://img.shields.io/badge/Foundry-v12-informational)
-[![version](https://img.shields.io/badge/version-1.0.1-red.svg)](https://semver.org)
+[![version](https://img.shields.io/badge/version-1.1.0-red.svg)](https://semver.org)
 
 [<img src="licensed/dnd.png" height="76"/>](licensed/dnd.png "D&D Licensed")
 [<img src="licensed/srd.png" height="76"/>](licensed/srd.png "SRD 5th")
@@ -28,7 +28,7 @@ The Torch light stats are applied to your character directly when you equipped i
 
 You can't have more than one light source equipped, the Lamp will be unequipped.
 
-### What if my Torch doesn't any charge left ?
+### What if my Torch doesn't any use left ?
 
 The Torch wont make any light and you will have a notification
 

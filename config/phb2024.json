@@ -6,7 +6,7 @@
             "color": "#fff1b4",
             "angle": 45,
             "bright": 60,
-            "dim": 60,
+            "dim": 120,
             "animation": {
                 "type": "torch",
                 "speed": 1,
@@ -18,7 +18,7 @@
             "color": "#fff1b4",
             "angle": 360,
             "bright": 30,
-            "dim": 30,
+            "dim": 60,
             "animation": {
                 "type": "torch",
                 "speed": 1,
