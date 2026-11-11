@@ -1,89 +1,44 @@
-export class LightEmitterItem {
-    static parse(parse) {
-        return new LightEmitterItem(
-            parse["name"],
-            parse["color"],
-            parse["angle"],
-            parse["bright"],
-            parse["dim"],
-            parse["animation"]["type"],
-            parse["animation"]["speed"],
-            parse["animation"]["intensity"]
-        )
-    }
+import {ItemSpec} from "./models/item-spec.js";
 
-    constructor(
-        name,
-        color,
-        angle,
-        bright,
-        dim,
-        type,
-        speed,
-        intensity
-    ) {
-        this.name = name;
-        this.color = color;
-        this.angle = angle;
-        this.bright = bright;
-        this.dim = dim;
-        this.type = type;
-        this.speed = speed;
-        this.intensity = intensity;
-    }
+function hasUsesLeft(item) {
+    const uses = item.system.uses;
+    if (!uses || !uses.max) return true;
+    return uses.spent === 0 || uses.value > 0;
 }
 
-export function detectAndCleanActorLightItem(actor, itemList, newOneId) {
-    let probs_equipped_item = undefined;
-    let equipped_item = undefined;
-    let notified = false;
+/**
+ * Find the light source equipped by an actor, and the items that must be unequipped
+ * (no use left, or conflicting with an already equipped light source).
+ * This function has no side effect: the caller applies updates and notifications.
+ */
+export function detectActorLightItem(actor, itemSpecs, newOneId) {
+    const notifications = [];
+    const toUnequip = [];
+    const equipped = [];
 
-    const lightEmmisionsCount = actor.items.filter(map => {
-        const item = itemList.find(item => map.name === item.name);
-        if (item && map.system.equipped) {
-            if ( map.system.uses.spent === 0 || map.system.uses.value > 0 ) {
-                if (map.id !== newOneId) {
-                    probs_equipped_item = item;
-                }
-                return true;
-            } else {
-                ui.notifications.warn(game.i18n.localize("ltbl5e.no_use_left") + map.name), { timeout: 3000 };
-                map.update({
-                    "system.equipped": false
-                });
-            }
+    for (const item of actor.items) {
+        if (!item.system.equipped) continue;
+        const definition = itemSpecs.find(spec => spec.name === item.name);
+        if (!definition) continue;
+        if (!hasUsesLeft(item)) {
+            notifications.push({level: "warn", message: game.i18n.localize("ltbl5e.no_use_left") + item.name});
+            toUnequip.push(item.id);
+            continue;
         }
-        return false;
-    }).length;
-
-    actor.items.forEach(map => {
-        const item = itemList.find(item => map.name === item.name);
-        if (item && map.system.equipped && (map.system.uses.spent === 0 || map.system.uses.value > 0) ) {
-            if (
-                (equipped_item === undefined && lightEmmisionsCount < 2) ||
-                (equipped_item === undefined && map.id !== newOneId)
-            ) {
-                equipped_item = item;
-            } else if (lightEmmisionsCount > 2) {
-                if (!notified) {
-                    notified = true;
-                    ui.notifications.warn(game.i18n.localize("ltbl5e.multiple_items"), { timeout: 3000 });
-                }
-                map.update({
-                    "system.equipped": false
-                });
-            } else {
-                ui.notifications.info(probs_equipped_item.name + game.i18n.localize("ltbl5e.light_conflict"), { timeout: 3000 });
-                map.update({
-                    "system.equipped": false
-                });
-            }
-        }
-    });
-
-    if (equipped_item === undefined) {
-        equipped_item = new LightEmitterItem("",null,360,0,0,"none",5,5);
+        equipped.push({item, definition});
     }
 
-    return equipped_item;
+    if (equipped.length > 1) {
+        // Keep the light source that was already equipped, drop the newly equipped one(s).
+        const kept = equipped.find(e => e.item.id !== newOneId) ?? equipped[0];
+        for (const e of equipped) {
+            if (e !== kept) toUnequip.push(e.item.id);
+        }
+        notifications.push(equipped.length > 2
+            ? {level: "warn", message: game.i18n.localize("ltbl5e.multiple_items")}
+            : {level: "info", message: kept.item.name + game.i18n.localize("ltbl5e.light_conflict")});
+        return {light: kept.definition, toUnequip, notifications};
+    }
+
+    return {light: equipped[0]?.definition ?? ItemSpec.NONE, toUnequip, notifications};
 }

@@ -1,54 +1,56 @@
-import {getActorVision} from "./vision.js";
-import {detectAndCleanActorLightItem} from "./light.js";
-
-export async function updateProtoypeTokenVision(actor) {
-  const vision = getActorVision(actor);
-  await actor.update({
-    "prototypeToken.sight.visionMode": vision.mode,
-    "prototypeToken.sight.range": vision.range,
-    "prototypeToken.sight.enabled": true,
-  });
-  return vision;
-}
-
-export async function updateTokenVision(vision, token) {
-  await token.document.update({
+/** Token fields (relative to TokenDocument / prototypeToken) for a vision result. */
+export function getVisionUpdate(vision) {
+  return {
+    "sight.enabled": true,
     "sight.visionMode": vision.mode,
     "sight.range": vision.range,
-    "sight.enabled": true,
-  });
+  };
 }
 
-export async function updateProtoypeTokenLight(actor, itemList, newOneId) {
-  const item = detectAndCleanActorLightItem(actor, itemList, newOneId);
-  await actor.update({
-    "prototypeToken.light.angle": item.angle,
-    "prototypeToken.light.color": item.color,
-    "prototypeToken.light.angle": item.angle,
-    "prototypeToken.light.bright": item.bright,
-    "prototypeToken.light.dim": item.dim,
-    "prototypeToken.light.animation.type": item.type,
-    "prototypeToken.light.animation.speed": item.speed,
-    "prototypeToken.light.animation.intensity": item.intensity,
-  });
-  return item;
+/** Token fields (relative to TokenDocument / prototypeToken) for a light emitting item spec. */
+export function getLightUpdate(spec) {
+  return {
+    "light.angle": spec.angle,
+    "light.color": spec.color,
+    "light.bright": spec.bright,
+    "light.dim": spec.dim,
+    "light.alpha": 0.5,
+    "light.animation.type": spec.animation.type,
+    "light.animation.speed": spec.animation.speed,
+    "light.animation.intensity": spec.animation.intensity,
+    "light.animation.reverse": false,
+  };
 }
 
-export async function updateTokenLight(item, token) {
-  await token.document.update({
-    light: {
-      angle: item.angle,
-      color: item.color,
-      angle: item.angle,
-      bright: item.bright,
-      dim: item.dim,
-      alpha: 0.5,
-      animation: {
-        type: item.type,
-        speed: item.speed,
-        intensity: item.intensity,
-        reverse: false
-      }
-    }
-  });
+/** Keep only the entries whose value differs from the document, to avoid no-op updates and hook loops. */
+function diff(source, update) {
+  const result = {};
+  for (const [key, value] of Object.entries(update)) {
+    const current = foundry.utils.getProperty(source, key);
+    // Colors are stored as Color objects (numbers) once prepared: compare their css string.
+    const normalized = (current !== null && typeof current === "object" && "css" in current) ? current.css : current;
+    if (normalized !== value && !(normalized == null && value == null)) result[key] = value;
+  }
+  return result;
+}
+
+/**
+ * Apply a token update to the actor's prototype token and to its tokens in the given scene (the one viewed by default).
+ * The caller must own the actor: owners may update the actor, its prototype token and its tokens.
+ */
+export async function updateActorTokens(actor, update, scene = canvas?.scene) {
+  const prototypeChanges = diff(actor.prototypeToken, update);
+  if (!foundry.utils.isEmpty(prototypeChanges)) {
+    const prefixed = Object.fromEntries(Object.entries(prototypeChanges).map(([k, v]) => [`prototypeToken.${k}`, v]));
+    await actor.update(prefixed);
+  }
+
+  if (!scene) return;
+  const updates = [];
+  for (const token of scene.tokens) {
+    if (token.actorId !== actor.id) continue;
+    const changes = diff(token, update);
+    if (!foundry.utils.isEmpty(changes)) updates.push({_id: token.id, ...changes});
+  }
+  if (updates.length) await scene.updateEmbeddedDocuments("Token", updates);
 }

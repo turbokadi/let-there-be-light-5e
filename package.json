@@ -1,0 +1,13 @@
+{
+  "name": "let-there-be-light-5e",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "dev": "node scripts/build.mjs --watch",
+    "release": "node scripts/build.mjs --release"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2"
+  }
+}
